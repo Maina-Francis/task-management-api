@@ -16,4 +16,9 @@ export class TasksController {
   async createTask(@Body() createTaskDto: CreateTaskDTO): Promise<Task> {
     return await this.tasksService.createTask(createTaskDto);
   }
+
+  @Get(':id')
+  async getTaskById(@Param('id') id: string): Promise<Task> {
+    return await this.tasksService.getTaskById(id);
+  }
 }

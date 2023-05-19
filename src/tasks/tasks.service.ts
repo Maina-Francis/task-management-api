@@ -11,7 +11,7 @@ export class TasksService {
     return await this.tasks;
   }
 
-  createTask(createTaskDto: CreateTaskDTO): Task {
+  async createTask(createTaskDto: CreateTaskDTO): Promise<Task> {
     const { title, description } = createTaskDto;
 
     const task: Task = {
@@ -21,7 +21,11 @@ export class TasksService {
       status: TaskStatus.OPEN,
     };
 
-    this.tasks.push(task);
+    await this.tasks.push(task);
     return task;
+  }
+
+  async getTaskById(id: string): Promise<Task> {
+    return await this.tasks.find((task) => task.id === id);
   }
 }

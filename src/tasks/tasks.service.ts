@@ -28,4 +28,8 @@ export class TasksService {
   async getTaskById(id: string): Promise<Task> {
     return await this.tasks.find((task) => task.id === id);
   }
+
+  async deleteTaskById(id: string): Promise<void> {
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
 }

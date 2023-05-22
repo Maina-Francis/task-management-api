@@ -31,12 +31,12 @@ export class TasksController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  async createTask(@Body() createTaskDto: CreateTaskDTO): Promise<Task> {
+  async createTask(@Body() createTaskDto: CreateTaskDTO) {
     return await this.tasksService.createTask(createTaskDto);
   }
 
   @Get(':id')
-  async getTaskById(@Param('id') id: string): Promise<Task> {
+  async getTaskById(@Param('id') id: string) {
     return await this.tasksService.getTaskById(id);
   }
 
@@ -44,7 +44,7 @@ export class TasksController {
   async updateTaskStatus(
     @Param('id') id: string,
     @Body('status', TaskStatusValidationPipe) status: TaskStatus,
-  ): Promise<Task> {
+  ) {
     return await this.tasksService.updateTaskStatus(id, status);
   }
 

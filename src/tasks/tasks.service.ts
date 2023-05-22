@@ -32,4 +32,15 @@ export class TasksService {
   async deleteTaskById(id: string): Promise<void> {
     this.tasks = this.tasks.filter((task) => task.id !== id);
   }
+
+  async updateTaskStatus(id: string, status: TaskStatus) {
+    const task = await this.getTaskById(id);
+
+    console.log(task);
+    console.log(status);
+
+    task.status = status;
+
+    return task;
+  }
 }

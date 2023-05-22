@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Task, TaskStatus } from './tasks.model';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateTaskDTO } from './dto/create.task.dto';
@@ -47,7 +47,17 @@ export class TasksService {
   }
 
   async getTaskById(id: string): Promise<Task> {
-    return await this.tasks.find((task) => task.id === id);
+    const task = await this.tasks.find((task) => task.id === id);
+
+    // Exception handling
+    if (!task) {
+      throw new HttpException(
+        `The task with ID ${id} wasn't found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return task;
   }
 
   async deleteTaskById(id: string): Promise<void> {
